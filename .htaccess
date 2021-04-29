@@ -1,0 +1,3 @@
+RewriteEngine On # Activer le module Rewrite
+RewriteRule ^météo/?$ météo.php [NC,L]
+RewriteRule ^[^/]+/(\d+)$ météo.php?id=$1

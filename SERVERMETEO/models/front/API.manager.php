@@ -1,5 +1,5 @@
 <?php
-// liaison faite pr heritage de la connexion Bdd
+// liaison faite pr heritage de la connexion Bdd bala bakbslaimn
 require_once 'models/Model.php';
 
 class APIManager extends Model{

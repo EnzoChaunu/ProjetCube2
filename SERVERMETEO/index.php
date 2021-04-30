@@ -1,7 +1,14 @@
 <?php
 
+// chemin ABSOLU | fichier index = routeur |
+// Constante définie permettant de crer le chemin absolu pr l'acces à nos ressources (img, code etc)
+// la constante URL sera remplacé par notre index.php avec devant hhtps / http suivi de mon API
 define("URL", str_replace("index.php", "", (isset($SERVER['HTTPS']) ?  "https" : "http").
 "://$_SERVER[HTTP_HOST]$_SERVER[PHP_SELF]")); //Modification de mon URL : http://localhost/...
+
+
+require_once "controllers/front/APIController.php";
+$apiController = new APIController(); // nouvelle instance pr utiliser les fonctions de la classe API 
 
 try{
     if(empty($_GET['page'])){
@@ -12,11 +19,11 @@ try{
         switch($url[0]){
             case "front" :
                 switch($url[1]){
-                    case "releves": echo "Voici les relevés ".$url[2]." demandées";
+                    case "releves":  $apiController->getReleves();
                     break;
-                    case "sonde": echo "Voici les données de nos capteurs";
+                    case "sonde": $apiController->getSonde();
                     break;
-                    case "station": echo "Voici les données de la station";
+                    case "station": $apiController->getStation();
                     break;
                     default: throw new Exception("la page n'existe pas");
                 }

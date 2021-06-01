@@ -1,38 +1,4 @@
-<<<<<<< HEAD
-<?php
 
-define("URL", str_replace("index.php", "", (isset($SERVER['HTTPS']) ?  "https" : "http").
-"://$_SERVER[HTTP_HOST]$_SERVER[PHP_SELF]")); //Modification de mon URL : http://localhost/...
-
-try{
-    if(empty($_GET['page'])){
-        throw new  Exception("la page n'existe pas");
-    } else{
-        $url = explode("/", filter_var($_GET['page'], FILTER_SANITIZE_URL));//Securisation du filtre en passant pas la méthode $_GET
-        if(empty($url[0]) || empty($url[1])) throw new  Exception("la page n'existe pas");//si le nombre de "dossiers" ne depasse pas 2 alors la page n'existe pas
-        switch($url[0]){
-            case "front" :
-                switch($url[1]){
-                    case "releves": echo "Voici les relevés ".$url[2]." demandées";
-                    break;
-                    case "sonde": echo "Voici les données de nos capteurs";
-                    break;
-                    case "station": echo "Voici les données de la station";
-                    break;
-                    default: throw new Exception("la page n'existe pas");
-                }
-            break;
-            case "back" : echo "page back end demandée";
-            break;
-            default: throw new Exception("la page n'existe pas");
-        }
-    }
-}
-
-catch(Exception $e){
-    $msg = $e->getMessage();
-    echo $msg;
-=======
 <?php
 
 // chemin ABSOLU | fichier index = routeur |
@@ -49,23 +15,47 @@ try{
     if(empty($_GET['page'])){
         throw new  Exception("la page n'existe pas");
     } else{
-        $url = explode("/", filter_var($_GET['page'], FILTER_SANITIZE_URL));//Securisation du filtre en passant pas la méthode $_GET
-        if(empty($url[0]) || empty($url[1])) throw new  Exception("la page n'existe pas");//si le nombre de "dossiers" ne depasse pas 2 alors la page n'existe pas
+        $url = explode("/", filter_var($_GET['page'], FILTER_SANITIZE_URL));
+        if(empty($url[0]) || empty($url[1]) ||empty($url[2])) throw new  Exception("la page n'existe pas");//si le nombre de "dossiers" ne depasse pas 2 alors la page n'existe pas
         switch($url[0]){
-            case "front" :
+            case "front" : 
                 switch($url[1]){
-                    case "releves":  $apiController->getReleves();
-                    break;
+                    case "releves": 
+                            //print '<td>'.$apiController->getReleves().'';
+                                switch($url[2]){
+                                case "1" :
+                                    print '<tr><h1>STATION METEO</h1>';
+                                    print '<td><h2>Présentation des données météo | id_releve(1)</h2></tr>';
+                                    print '<td>'.$apiController->getReleves1().'';
+                                break;
+
+                                case "2" :
+                                    print '<tr><h1>STATION METEO</h1>';
+                                    print '<tr><h1>Présentation des données météo | id_releve(2)</h1></tr>';
+                                    print '<td>'.$apiController->getReleves2().'';
+                                break;
+
+                                case "3" :
+                                    print '<tr><h1>STATION METEO</h1>';
+                                    print '<tr><h1>Présentation des données météo | id_releve(3)</h1></tr>';
+                                    print '<td>'.$apiController->getReleves3();'</td>';
+                                    print '</tr>';
+                                break;
+
                     case "sonde": $apiController->getSonde();
                     break;
+
                     case "station": $apiController->getStation();
                     break;
-                    default: throw new Exception("la page n'existe pas");
+
+                    default: throw new Exception("Cette page n'existe pas");
                 }
+            }
+        
             break;
             case "back" : echo "page back end demandée";
             break;
-            default: throw new Exception("la page n'existe pas");
+            default: throw new Exception("Cette page n'existe pas");
         }
     }
 }
@@ -73,5 +63,15 @@ try{
 catch(Exception $e){
     $msg = $e->getMessage();
     echo $msg;
->>>>>>> 37f96e5c6dffb550d949d24b12752af09dd43f23
 }
+
+?>
+
+
+                    
+                    
+                   
+               
+                
+                   
+    

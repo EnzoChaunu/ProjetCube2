@@ -1,13 +1,6 @@
-<<<<<<< HEAD
-RewriteEngine On # Activer le module Rewrite
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-
-=======
 # partie configuration du serveur
 RewriteEngine On # Activer le module Rewrite
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
->>>>>>> 37f96e5c6dffb550d949d24b12752af09dd43f23
 RewriteRule ^(.*)$ index.php?page=$1
